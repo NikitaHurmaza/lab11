@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+   <h:head>
+      <link rel="stylesheet" type="text/css" href="secondPage.css"/>
+   </h:head>
+   <body>
+   <div class="home">
+      <p:tabMenu activeIndex="#{param.i}">
+         <p:menuitem value="Home" outcome="index" icon="pi pi-fw pi-home">
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+         <p:menuitem value="Cписок книг заданого автора" outcome="page2.xhtml" icon="pi pi-list" >
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+         <p:menuitem value="Cписок книг заданого видавництва" outcome="page3.xhtml" icon="pi pi-list" >
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+         <p:menuitem value="Cписок книг заданого року" outcome="page4.xhtml" icon="pi pi-list" >
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+         <p:menuitem value="Cписок авторів " outcome="page5.xhtml" icon="pi pi-list" >
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+         <p:menuitem value="Cписок видвництв" outcome="page6.xhtml" icon="pi pi-list" >
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+         <p:menuitem value="Cписок книг кожного видвництва" outcome="page7.xhtml" icon="pi pi-list" >
+            <f:param name="i" value="0"/>
+         </p:menuitem>
+      </p:tabMenu>
+   </div>
+   <div class="main">
+      <div class="wrapper">
+
+         <h:form id="searchAuthor">
+            <p:outputLabel value="Видавництво" for="publisher"  />
+            <p:inputText  required="true"  value="#{bookBean.publisher}" id="publisher"/>
+            <p:commandButton value="Знайти" ajax="false" style="margin: 10px" />
+            <p:commandButton value="Очистить" ajax="false" onclick="document.getElementById('searchPublisher:publisher').value='';" style="margin: 10px" type="submit" />
+
+         </h:form>
+         <p:dataTable value ="#{bookBean.searchByPublisher()}" var ="b" stripedRows="true" size="small">
+            <p:column headerText="ID">
+               <h:outputText value="#{b.id}"/>
+            </p:column>
+            <p:column headerText="Назва">
+               <h:outputText value="#{b.bookName}"/>
+            </p:column>
+            <p:column headerText="Автор">
+               <h:outputText value="#{b.author}"/>
+            </p:column>
+            <p:column headerText="Видавництво">
+               <h:outputText value="#{b.publisher}"/>
+            </p:column>
+            <p:column headerText="Рік публікації">
+               <h:outputText value="#{b.yearOfPublication}"/>
+            </p:column>
+            <p:column headerText="Кількість сторінок">
+               <h:outputText value="#{b.numberOfPages}"/>
+            </p:column>
+            <p:column headerText="Ціна">
+               <h:outputText value="#{b.price}$"/>
+            </p:column>
+         </p:dataTable>
+      </div>
+   </div>
+   </body>
+</f:view>
+</html>
